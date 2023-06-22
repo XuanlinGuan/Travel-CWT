@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CONCUR/CONCUR.iml" filepath="$PROJECT_DIR$/CONCUR/CONCUR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CWT/CWT.iml" filepath="$PROJECT_DIR$/CWT/CWT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomerSystem/CustomerSystem.iml" filepath="$PROJECT_DIR$/CustomerSystem/CustomerSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/FinalProject.iml" filepath="$PROJECT_DIR$/.idea/FinalProject.iml" />
+    </modules>
+  </component>
+</project>
