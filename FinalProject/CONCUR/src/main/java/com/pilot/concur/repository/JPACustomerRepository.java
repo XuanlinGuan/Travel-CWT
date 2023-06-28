@@ -11,6 +11,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface JPACustomerRepository extends JpaRepository<Customer, String> {
+    /**
+    * @Description: use email to find the customer form SQL
+    * @Param: [email]
+    * @return: java.util.Optional<com.pilot.concur.entity.Customer>
+    * @Author: Xuanlin Guan
+    */
     @Query(value = "SELECT c.* FROM Customer c WHERE c.email =:email", nativeQuery = true)
     Optional<Customer> findByEmail(@Param("email") String email);
 

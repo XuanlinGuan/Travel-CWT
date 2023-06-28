@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.function.LongFunction;
 
 @Entity
 @Table(name = "token")
@@ -14,7 +15,7 @@ public class Token {
     private String email;
     @Column(name = "expiration_timestamp")
     private Date expiration_timestamp;
-    @Column(name = "token")
+    @Column(name = "token", length = 500)
     private String token;
 
     public Token() {

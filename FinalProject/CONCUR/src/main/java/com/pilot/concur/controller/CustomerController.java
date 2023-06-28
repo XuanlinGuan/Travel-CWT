@@ -26,9 +26,22 @@ import org.springframework.web.client.HttpClientErrorException;
 @RestController
 @RestControllerAdvice
 public class CustomerController {
+
+    /**
+    * @Description: Pick up a Service bean from container
+    * @Param:
+    * @return:
+    * @Author: Xuanlin Guan
+    */
     @Autowired
     private ConcurService concurService;
 
+    /**
+    * @Description: create API to create a new customer
+    * @Param: [customer]
+    * @return: java.lang.String
+    * @Author: Xuanlin Guan
+    */
     @PostMapping(value = "/concur/create/customer")
     public String createCustomer( @RequestBody Customer customer) throws HttpClientErrorException {
         if (customer.getId().isEmpty()) {
@@ -52,6 +65,12 @@ public class CustomerController {
         return concurService.saveCustomer(customer);
     }
 
+    /**
+    * @Description: Delete a customer from concur db
+    * @Param: [id]
+    * @return: java.lang.String
+    * @Author: Xuanlin Guan
+    */
     @DeleteMapping(value = "/concur/delete/customer")
     public String deleteCustomer(@RequestParam(value = "id") String id) {
         if (id.isEmpty()) {
@@ -60,6 +79,12 @@ public class CustomerController {
         return concurService.deleteCustomer(id);
     }
 
+    /**
+    * @Description: update a exist customer info
+    * @Param: [id, LastName, firstName, email, address]
+    * @return: java.util.Optional<com.pilot.concur.entity.Customer>
+    * @Author: Xuanlin Guan
+    */
     @PutMapping(value = "/concur/update/customer")
     public Optional<Customer> updateCustomer(@RequestParam(value = "id") String id, @RequestParam(value = "LastName", required = false)String LastName,
             @RequestParam(value = "firstName", required = false) String firstName, @RequestParam(value = "email", required = false)String email,
@@ -84,23 +109,49 @@ public class CustomerController {
         return concurService.getCustomerById(id);
     }
 
+    /**
+    * @Description: find a customer from db by customer ID
+    * @Param: [id]
+    * @return: java.util.Optional<com.pilot.concur.entity.Customer>
+    * @Author: Xuanlin Guan
+    */
     @GetMapping(value = "/concur/get/customerById/{id}")
     public Optional<Customer> getCustomerById(@PathVariable(value = "id")String id) {
         return concurService.getCustomerById(id);
     }
 
+    /**
+    * @Description: find a customer form db by customer email
+    * @Param: [email]
+    * @return: java.util.Optional<com.pilot.concur.entity.Customer>
+    * @Author: Xuanlin Guan
+    */
     @GetMapping(value = "/concur/get/customerByEmail")
     public Optional<Customer> getCustomerByEmail(@RequestParam(value = "email")String email) {
         return concurService.findByEmail(email);
     }
 
-
+    /**
+    * @Description: find a customer from db by a token from CWT
+    * @Param: [token]
+    * @return: com.pilot.concur.entity.Customer
+    * @Author: Xuanlin Guan
+    */
     @PostMapping(value = "/concur/token")
-    public Optional<Customer> findCustomerInfoByToken(@RequestParam(value = "token") String token) {
-        return concurService.findByToken(token);
+    public Customer findCustomerInfoByToken(@RequestParam(value = "token") String token) {
+        Optional<Customer> customer =  concurService.findByToken(token);
+        if (customer.isPresent()) {
+            return customer.get();
+        }
+        return null;
     }
 
-
+    /**
+    * @Description: catch the checked exception from the code in this class and show the message
+    * @Param: [e]
+    * @return: java.lang.String
+    * @Author: Xuanlin Guan
+    */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleExceptions(Exception e){

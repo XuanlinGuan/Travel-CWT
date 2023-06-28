@@ -1,6 +1,7 @@
 package com.pilot.customersystem.controller;
 
 import com.pilot.customersystem.entity.Customer;
+import com.pilot.customersystem.entity.Login;
 import com.pilot.customersystem.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,14 +20,25 @@ public class LogInController {
     @Autowired
     LoginService loginService;
 
-
+    /**
+    * @Description: Welcome
+    * @Param: []
+    * @return: java.lang.String
+    * @Author: Xuanlin Guan
+    */
     @GetMapping(value = "/customersystem/index")
     public String start() {
         return "Welcome to TRAVEl-CWT System";
     }
 
+    /**
+    * @Description: Login request
+    * @Param: [login]
+    * @return: java.lang.String
+    * @Author: Xuanlin Guan
+    */
     @PostMapping(value = "/customersystem/login")
-    public String login(@RequestBody Customer customer) {
-        return loginService.sendLoginInfo(customer);
+    public String login(@RequestBody Login login) {
+        return loginService.sendLoginInfo(login);
     }
 }
